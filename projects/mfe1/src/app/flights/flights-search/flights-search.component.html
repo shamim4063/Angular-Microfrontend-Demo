@@ -14,4 +14,7 @@
     <button (click)="search()">Search</button>
     <button (click)="terms()">Terms...</button>
   </div>
+  <p *ngIf="currentFlight$ | async as currentFlight">
+    Current Flight: {{ currentFlight.name }}
+  </p>
 </div>

@@ -7,18 +7,9 @@ import { FlightsModule } from './flights/flights.module';
 import { APP_ROUTES } from './app.routes';
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    FlightsModule,
-    RouterModule.forRoot(APP_ROUTES)
-  ],
-  declarations: [
-    HomeComponent,
-    AppComponent,
-  ],
+  imports: [BrowserModule, FlightsModule, RouterModule.forRoot(APP_ROUTES)],
+  declarations: [HomeComponent, AppComponent],
   providers: [],
-  bootstrap: [
-      AppComponent
-  ]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

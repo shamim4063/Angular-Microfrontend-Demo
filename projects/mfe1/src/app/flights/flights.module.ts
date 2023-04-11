@@ -4,10 +4,16 @@ import { FlightsSearchComponent } from './flights-search/flights-search.componen
 import { RouterModule } from '@angular/router';
 import { FLIGHTS_ROUTES } from './flights.routes';
 import { LazyComponent } from './lazy/lazy.component';
-import { EventLibModule } from 'event-lib';
+import { flightStateFeature } from 'event-lib';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(FLIGHTS_ROUTES)],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(FLIGHTS_ROUTES),
+    StoreModule.forRoot({}),
+    StoreModule.forFeature(flightStateFeature),
+  ],
   declarations: [FlightsSearchComponent, LazyComponent],
 })
 export class FlightsModule {}

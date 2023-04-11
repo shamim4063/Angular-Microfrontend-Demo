@@ -5,4 +5,8 @@
   <li><a routerLink="/flights/lazy-flight">Lazy Flight</a></li>
 </ul>
 
+<p *ngIf="currentFlight$ | async as currentFlight">
+  Current Flight {{ currentFlight.name }}
+</p>
+
 <router-outlet></router-outlet>
