@@ -37,5 +37,5 @@ module.exports = withModuleFederationPlugin({
   }),
 
   // Explicitly share mono-repo libs:
-  sharedMappings: ["auth-lib"],
+  sharedMappings: ["auth-lib", "event-lib"],
 });

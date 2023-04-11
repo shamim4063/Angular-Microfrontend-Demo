@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AuthLibService } from 'auth-lib';
 import { EventLibService } from 'event-lib';
 import { Subject } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
+import { takeUntil, first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',

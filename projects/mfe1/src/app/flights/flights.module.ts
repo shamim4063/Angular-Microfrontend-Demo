@@ -7,11 +7,7 @@ import { LazyComponent } from './lazy/lazy.component';
 import { EventLibModule } from 'event-lib';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild(FLIGHTS_ROUTES),
-    EventLibModule,
-  ],
+  imports: [CommonModule, RouterModule.forChild(FLIGHTS_ROUTES)],
   declarations: [FlightsSearchComponent, LazyComponent],
 })
 export class FlightsModule {}
