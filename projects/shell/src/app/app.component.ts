@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AuthLibService } from 'auth-lib';
-import { EventLibService, selectCurrentFlight } from 'event-lib';
+import { EventLibService, currentFlightSelector } from 'event-lib';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -12,14 +12,14 @@ import { takeUntil } from 'rxjs/operators';
 export class AppComponent {
   title = 'shell';
   unsubscription$ = new Subject<void>();
-  currentFlight$ = this.store.select(selectCurrentFlight);
+  currentFlight$ = this.store.select(currentFlightSelector);
 
   constructor(
     private service: AuthLibService,
     private eventService: EventLibService,
     private store: Store
   ) {
-    this.service.login('Max', null);
+    this.service.login('Mehedi', null);
   }
 
   ngOnInit() {

@@ -3,12 +3,11 @@ import { Store } from '@ngrx/store';
 import { AuthLibService } from 'auth-lib';
 import {
   EventLibService,
+  currentFlightSelector,
   getCurrentFlight,
-  selectCurrentFlight,
 } from 'event-lib';
 import { Subject } from 'rxjs';
 import { debounceTime, filter, takeUntil, tap } from 'rxjs/operators';
-import { AppState } from '../../app.state';
 
 @Component({
   selector: 'app-flights-search',
@@ -20,7 +19,7 @@ export class FlightsSearchComponent implements OnInit, OnDestroy {
   user = this.service.user;
   formInput$ = new Subject<string | null>();
   unsubscription$ = new Subject<void>();
-  currentFlight$ = this.store.select(selectCurrentFlight);
+  currentFlight$ = this.store.select(currentFlightSelector);
 
   // And add that:
   constructor(
@@ -53,7 +52,7 @@ export class FlightsSearchComponent implements OnInit, OnDestroy {
         currentFlight: {
           destination: 'Cumilla',
           from: 'Dhaka',
-          name: 'Aviation F342',
+          name: 'Bangla Aviation F342',
         },
       })
     );

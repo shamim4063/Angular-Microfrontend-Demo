@@ -34,6 +34,11 @@ module.exports = withModuleFederationPlugin({
       strictVersion: true,
       requiredVersion: "auto",
     },
+    "@ngrx/store": {
+      singleton: true,
+      strictVersion: true,
+      requiredVersion: "auto",
+    },
   }),
 
   // Explicitly share mono-repo libs:

@@ -5,9 +5,15 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { FlightsModule } from './flights/flights.module';
 import { APP_ROUTES } from './app.routes';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
-  imports: [BrowserModule, FlightsModule, RouterModule.forRoot(APP_ROUTES)],
+  imports: [
+    BrowserModule,
+    FlightsModule,
+    RouterModule.forRoot(APP_ROUTES),
+    StoreModule.forRoot({}),
+  ],
   declarations: [HomeComponent, AppComponent],
   providers: [],
   bootstrap: [AppComponent],
