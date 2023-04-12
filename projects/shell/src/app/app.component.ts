@@ -37,5 +37,6 @@ export class AppComponent {
   ngOnDestroy(): void {
     this.unsubscription$.next();
     this.unsubscription$.complete();
+    localStorage.removeItem('user');
   }
 }
