@@ -10,10 +10,18 @@ export class AuthLibService {
     return this.userName;
   }
 
-  constructor() {}
+  constructor() { }
 
   public login(userName: string, password: string): void {
     // Authentication for **honest** users TM. (c) Manfred Steyer
     this.userName = userName;
+  }
+
+  public setUserName(key: string, userName: string) {
+    localStorage.setItem(key, userName);
+  }
+
+  public localStorageUserName(key: string): string {
+    return localStorage.getItem(key);
   }
 }

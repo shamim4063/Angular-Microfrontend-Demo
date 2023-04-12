@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { AuthLibService } from 'auth-lib';
 import {
   EventLibService,
+  FlightModel,
   currentFlightSelector,
   getCurrentFlight,
 } from 'event-lib';
@@ -16,19 +17,25 @@ import { debounceTime, filter, takeUntil, tap } from 'rxjs/operators';
 })
 export class FlightsSearchComponent implements OnInit, OnDestroy {
   // Add this:
-  user = this.service.user;
+  // user = this.service.user;
+  user = this.service.localStorageUserName('user'); // Get user name form Local storage
   formInput$ = new Subject<string | null>();
   unsubscription$ = new Subject<void>();
-  currentFlight$ = this.store.select(currentFlightSelector);
+  // currentFlight$ = this.store.select(currentFlightSelector);
+  currentFlight: FlightModel;
 
   // And add that:
   constructor(
     private service: AuthLibService,
     private eventService: EventLibService,
     private store: Store
-  ) {}
+  ) { }
 
   ngOnInit(): void {
+    this.eventService.flightData.subscribe(flightData => {
+      if(flightData)
+      this.currentFlight = JSON.parse(flightData);
+    })
     this.formInput$
       .pipe(
         filter(Boolean),
@@ -44,18 +51,26 @@ export class FlightsSearchComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.unsubscription$.next();
     this.unsubscription$.complete();
+    this.eventService.storeFlightData(null);
+    localStorage.removeItem('flightData');
   }
 
   search(): void {
-    this.store.dispatch(
-      getCurrentFlight({
-        currentFlight: {
-          destination: 'Cumilla',
-          from: 'Dhaka',
-          name: 'Bangla Aviation F342',
-        },
-      })
-    );
+    // this.store.dispatch(
+    //   getCurrentFlight({
+    //     currentFlight: {
+    //       destination: 'Cumilla',
+    //       from: 'Dhaka',
+    //       name: 'Bangla Aviation F342',
+    //     },
+    //   })
+    // );
+    const currentFlight = {
+      destination: 'Cumilla',
+      from: 'Dhaka',
+      name: 'Bangla Aviation F342'
+    }
+    this.eventService.storeFlightData(currentFlight);
   }
 
   terms(): void {
