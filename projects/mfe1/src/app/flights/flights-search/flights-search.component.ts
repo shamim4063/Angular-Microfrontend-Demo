@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AuthLibService } from 'auth-lib';
 import {
   EventLibService,
+  FlightModel,
   currentFlightSelector,
   getCurrentFlight,
 } from 'event-lib';
@@ -20,6 +22,7 @@ export class FlightsSearchComponent implements OnInit, OnDestroy {
   formInput$ = new Subject<string | null>();
   unsubscription$ = new Subject<void>();
   currentFlight$ = this.store.select(currentFlightSelector);
+  flight = new FlightFormModel();
 
   // And add that:
   constructor(
@@ -35,10 +38,8 @@ export class FlightsSearchComponent implements OnInit, OnDestroy {
         debounceTime(1000),
         takeUntil(this.unsubscription$)
       )
-      .subscribe((event: any) => {
-        const fromVal = event.target?.value;
-        console.log('Emitted From : ', fromVal);
-        this.eventService.updateSharedData(fromVal as string);
+      .subscribe((from: string) => {
+        this.eventService.updateSharedData(from);
       });
   }
   ngOnDestroy(): void {
@@ -46,19 +47,29 @@ export class FlightsSearchComponent implements OnInit, OnDestroy {
     this.unsubscription$.complete();
   }
 
-  search(): void {
-    this.store.dispatch(
-      getCurrentFlight({
-        currentFlight: {
-          destination: 'Cumilla',
-          from: 'Dhaka',
-          name: 'Bangla Aviation F342',
-        },
-      })
-    );
+  submit(form: NgForm): void {
+    if (form.valid) {
+      this.store.dispatch(
+        getCurrentFlight({
+          currentFlight: {
+            name: this.flight.name,
+            destination: this.flight.destination,
+            from: this.flight.from,
+          },
+        })
+      );
+      form.resetForm();
+      this.flight = new FlightFormModel();
+    }
   }
 
   terms(): void {
     alert('Not implemented for this demo!');
   }
+}
+
+export class FlightFormModel {
+  name: string;
+  from: string;
+  destination: string;
 }
