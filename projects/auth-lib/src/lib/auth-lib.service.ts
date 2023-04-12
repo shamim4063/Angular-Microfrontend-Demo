@@ -21,7 +21,7 @@ export class AuthLibService {
     localStorage.setItem(key, userName);
   }
 
-  public localStorageUserName(key: string): string {
+  public getUserName(key: string): string {
     return localStorage.getItem(key);
   }
 }

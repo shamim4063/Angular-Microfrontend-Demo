@@ -18,12 +18,16 @@ export class EventLibService {
     this._fromFieldData$.next(data);
   }
 
-  storeFlightData(data: FlightModel) {
+  setFlightData(data: FlightModel) {
     localStorage.setItem('flightData', JSON.stringify(data));
-    this._flightData$.next(localStorage.getItem('flightData'));
+    this.updateFlightData();
   }
 
   get flightData() {
     return this._flightData$.asObservable();
+  }
+
+  updateFlightData() {
+    this._flightData$.next(localStorage.getItem('flightData'));
   }
 }

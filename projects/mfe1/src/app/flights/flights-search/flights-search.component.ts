@@ -18,7 +18,7 @@ import { debounceTime, filter, takeUntil, tap } from 'rxjs/operators';
 export class FlightsSearchComponent implements OnInit, OnDestroy {
   // Add this:
   // user = this.service.user;
-  user = this.service.localStorageUserName('user'); // Get user name form Local storage
+  user = this.service.getUserName('user'); // Get user name form Local storage
   formInput$ = new Subject<string | null>();
   unsubscription$ = new Subject<void>();
   // currentFlight$ = this.store.select(currentFlightSelector);
@@ -51,7 +51,7 @@ export class FlightsSearchComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.unsubscription$.next();
     this.unsubscription$.complete();
-    this.eventService.storeFlightData(null);
+    this.eventService.setFlightData(null);
     localStorage.removeItem('flightData');
   }
 
@@ -70,7 +70,7 @@ export class FlightsSearchComponent implements OnInit, OnDestroy {
       from: 'Dhaka',
       name: 'Bangla Aviation F342'
     }
-    this.eventService.storeFlightData(currentFlight);
+    this.eventService.setFlightData(currentFlight);
   }
 
   terms(): void {
