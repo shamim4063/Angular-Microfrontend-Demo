@@ -5,7 +5,14 @@
   <li><a routerLink="/flights/lazy-flight">Lazy Flight</a></li>
 </ul>
 
-<div style="margin-bottom: 10px">
+<div
+  style="
+    margin-bottom: 20px;
+    border-bottom: 1px solid gray;
+    border-radius: 1px;
+    padding-bottom: 10px;
+  "
+>
   <h3>Current Flight</h3>
   <p *ngIf="currentFlight$ | async as currentFlight; else noFlight">
     {{ currentFlight.name }}

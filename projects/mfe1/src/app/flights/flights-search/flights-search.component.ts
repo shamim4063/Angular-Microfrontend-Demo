@@ -4,7 +4,6 @@ import { Store } from '@ngrx/store';
 import { AuthLibService } from 'auth-lib';
 import {
   EventLibService,
-  FlightModel,
   currentFlightSelector,
   getCurrentFlight,
 } from 'event-lib';
@@ -68,7 +67,7 @@ export class FlightsSearchComponent implements OnInit, OnDestroy {
   }
 }
 
-export class FlightFormModel {
+class FlightFormModel {
   name: string;
   from: string;
   destination: string;
